@@ -1,0 +1,71 @@
+TABLE books
+-------------------
+publishing_year
+book_name
+author
+language_code
+author_rating
+book_average_rating
+book_ratings_count
+genre
+publisher
+book_id
+
+TABLE shipping.city
+---------------------
+city_id
+city_name
+state
+population
+area
+
+TABLE shipping.shipment
+-------------------
+ship_id
+cust_id
+weight
+truck_id
+driver_id
+city_id
+ship_date
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+Напишите запрос, который для каждого автора книг, опубликованных после 1930 года,
+подсчитывает количество издательств, в которых публиковались книги,
+сумму количества всех оценок таких книг, их средний рейтинг,
+минимальный и максимальный год публикации.
+
+Выведите только таких авторов, которые публиковались хотя бы в 2 издательствах и опубликовали хотя бы одну книгу после 1950 года.
+*/
+select distinct author
+from books
+where publishing_year > 1950
+
+/*
+select author,
+    count(publisher) as publisher_count,
+    sum(book_ratings_count) as book_ratings_count_sum,
+    avg(book_ratings_count) as average_rating,
+    min(publishing_year) as min_publishing_year,
+    max(publishing_year) as max_publishing_year
+from books
+where publishing_year > 1930
+group by author
+having count(publisher) >= 2
+*/

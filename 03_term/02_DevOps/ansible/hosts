@@ -1,0 +1,2 @@
+[servers]
+devops-server ansible_host=46.148.235.141 ansible_ssh_user=student55 ansible_ssh_private_key_file=~/.ssh/devops

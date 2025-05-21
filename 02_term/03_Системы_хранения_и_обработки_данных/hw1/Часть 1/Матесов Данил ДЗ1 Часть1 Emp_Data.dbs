@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="Emp_Data" id="Project-1814" database="Sqlite" >
+	<schema name="Default" >
+		<table name="department" spec="" >
+			<column name="id" type="INTEGER" jt="4" mandatory="y" >
+				<identity><![CDATA[AUTOINCREMENT]]></identity>
+			</column>
+			<column name="department" type="VARCHAR" length="100" jt="12" mandatory="y" />
+			<index name="pk_department" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="empl_in_prj" spec="" >
+			<column name="employee" type="INTEGER" jt="4" mandatory="y" />
+			<column name="project" type="INTEGER" jt="4" mandatory="y" />
+			<fk name="FK_empl_in_prj employee" to_schema="Default" to_table="employee" options="" >
+				<fk_column name="employee" pk="id" />
+			</fk>
+			<fk name="FK_empl_in_prj project" to_schema="Default" to_table="project" options="" >
+				<fk_column name="project" pk="id" />
+			</fk>
+		</table>
+		<table name="employee" spec="" >
+			<column name="id" type="INTEGER" jt="4" mandatory="y" >
+				<identity><![CDATA[AUTOINCREMENT]]></identity>
+			</column>
+			<column name="employee" type="VARCHAR" length="100" jt="12" mandatory="y" />
+			<column name="travel_required" type="BOOLEAN" jt="-7" mandatory="y" />
+			<column name="department" type="INTEGER" jt="4" mandatory="y" />
+			<column name="position" type="INTEGER" jt="4" mandatory="y" />
+			<column name="supervisor" type="INTEGER" jt="4" mandatory="y" />
+			<index name="pk_employee" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="FK_employee department" to_schema="Default" to_table="department" options="" >
+				<fk_column name="department" pk="id" />
+			</fk>
+			<fk name="FK_employee position" to_schema="Default" to_table="position" options="" >
+				<fk_column name="position" pk="id" />
+			</fk>
+			<fk name="FK_employee supervisor" to_schema="Default" to_table="supervisor" options="" >
+				<fk_column name="supervisor" pk="id" />
+			</fk>
+		</table>
+		<table name="position" spec="" >
+			<column name="id" type="INTEGER" jt="4" mandatory="y" >
+				<identity><![CDATA[AUTOINCREMENT]]></identity>
+			</column>
+			<column name="position" type="VARCHAR" length="100" jt="12" mandatory="y" />
+			<index name="pk_position" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="project" spec="" >
+			<column name="id" type="INTEGER" jt="4" mandatory="y" >
+				<identity><![CDATA[AUTOINCREMENT]]></identity>
+			</column>
+			<column name="project" type="VARCHAR" length="100" jt="12" mandatory="y" />
+			<index name="pk_project" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="supervisor" spec="" >
+			<column name="id" type="INTEGER" jt="4" mandatory="y" >
+				<identity><![CDATA[AUTOINCREMENT]]></identity>
+			</column>
+			<column name="supervisor" type="VARCHAR" length="100" jt="12" mandatory="y" />
+			<index name="pk_supervisor" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+	</schema>
+	<connector name="Sqlite" database="Sqlite" driver_class="org.sqlite.JDBC" driver_jar="sqlite-jdbc-3.40.0.0.jar" driver_desc="Standard" host="localhost" port="7210" instance="/home/danil/Yandex.Disk/DOC/MIPT-MDS/Семестр 2/Системы хранения и обработки данных/Emp_Data.db" useSystemProxy="false" />
+	<layout name="Default Layout" id="Layout-18e6" confirmed="y" show_relation="columns" >
+		<entity schema="Default" name="department" color="3986C1" x="160" y="384" />
+		<entity schema="Default" name="empl_in_prj" color="3986C1" x="288" y="48" />
+		<entity schema="Default" name="employee" color="3986C1" x="368" y="208" />
+		<entity schema="Default" name="position" color="3986C1" x="624" y="96" />
+		<entity schema="Default" name="project" color="3986C1" x="48" y="80" />
+		<entity schema="Default" name="supervisor" color="3986C1" x="624" y="368" />
+		<callout x="576" y="624" pointer="Round" >
+			<comment><![CDATA[This is a layout - a diagram with tools.
+- Right-click the layout to create new tables. 
+- Double-click table headers to edit. 
+- For a better understanding of the schema, create multiple layouts.
+- The schema will be saved to the model file. 
+- Later, you can connect to any database and deploy the schema into the database.]]></comment>
+		</callout>
+	</layout>
+</project>

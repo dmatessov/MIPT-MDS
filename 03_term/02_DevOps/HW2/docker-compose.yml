@@ -1,0 +1,15 @@
+services:
+  nginx-customized:
+    image: registry.gitlab.com/danil.matessov/ciexercise/nginx-customized
+    ports:
+      - "35055:80"
+    networks:
+      - custom-network
+  postgres-customized:
+    image: registry.gitlab.com/danil.matessov/ciexercise/postgres-customized
+    networks:
+      - custom-network
+
+networks:
+  custom-network:
+

@@ -1,0 +1,19 @@
+services:
+  nginx-customized:
+    build:
+      context: ./nginx-customized
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    networks:
+      - custom-network
+  postgres-customized:
+    build:
+      context: ./postgres-customized
+      dockerfile: Dockerfile
+    networks:
+      - custom-network
+
+networks:
+  custom-network:
+

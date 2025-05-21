@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="healthcare-analytics" id="Project-1903" database="MySql" >
+	<schema name="healthcare-analytics" >
+		<table name="attendance" prior="attendance1" >
+			<column name="patient_id" type="INT" jt="4" mandatory="y" />
+			<column name="health_camp_id" type="INT" jt="4" mandatory="y" />
+			<column name="registration_date" type="DATE" jt="91" mandatory="y" />
+			<column name="var1" type="INT" jt="4" mandatory="y" />
+			<column name="var2" type="INT" jt="4" mandatory="y" />
+			<column name="var3" type="INT" jt="4" mandatory="y" />
+			<column name="var5" prior="var4" type="INT" jt="4" mandatory="y" />
+			<fk name="fk_attendance_patient_profile" to_schema="healthcare-analytics" to_table="patient_profile" >
+				<fk_column name="patient_id" pk="patient_id" />
+			</fk>
+			<fk name="fk_attendance_health_camp_detail" to_schema="healthcare-analytics" to_table="health_camp_detail" >
+				<fk_column name="health_camp_id" pk="health_camp_id" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="employer_category" prior="tbl" >
+			<column name="id" type="INT" jt="4" mandatory="y" >
+				<identity><![CDATA[AUTO_INCREMENT]]></identity>
+			</column>
+			<column name="employer_category" type="VARCHAR" length="100" jt="12" mandatory="y" />
+			<index name="pk_employer_category" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="first_health_camp_attended" prior="tbl" >
+			<column name="patient_id" type="INT" jt="4" mandatory="y" />
+			<column name="health_camp_id" type="INT" jt="4" mandatory="y" />
+			<column name="donation" type="INT" jt="4" mandatory="y" />
+			<column name="health_score" type="DECIMAL" jt="3" mandatory="y" />
+			<fk name="fk_first_health_camp_attended_patient_profile" to_schema="healthcare-analytics" to_table="patient_profile" >
+				<fk_column name="patient_id" pk="patient_id" />
+			</fk>
+			<fk name="fk_first_health_camp_attended_health_camp_detail" to_schema="healthcare-analytics" to_table="health_camp_detail" >
+				<fk_column name="health_camp_id" pk="health_camp_id" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="health_camp_detail" prior="tbl" >
+			<column name="health_camp_id" type="INT" jt="4" mandatory="y" />
+			<column name="camp_start_date" type="DATE" jt="91" mandatory="y" />
+			<column name="camp_end_date" type="DATE" jt="91" mandatory="y" />
+			<column name="category1" type="INT" jt="4" mandatory="y" />
+			<column name="category2" type="CHAR" length="1" jt="1" mandatory="y" />
+			<column name="category3" type="INT" jt="4" mandatory="y" />
+			<index name="pk_health_camp_detail" unique="PRIMARY_KEY" >
+				<column name="health_camp_id" />
+			</index>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="patient_profile" prior="tbl" >
+			<column name="patient_id" type="INT" jt="4" mandatory="y" />
+			<column name="online_follower" type="BOOLEAN" jt="16" mandatory="y" >
+				<defo><![CDATA[0]]></defo>
+			</column>
+			<column name="linkedin_shared" type="BOOLEAN" jt="16" mandatory="y" >
+				<defo><![CDATA[0]]></defo>
+			</column>
+			<column name="twitter_shared" type="BOOLEAN" jt="16" mandatory="y" >
+				<defo><![CDATA[0]]></defo>
+			</column>
+			<column name="facebook_shared" type="BOOLEAN" jt="16" mandatory="y" >
+				<defo><![CDATA[0]]></defo>
+			</column>
+			<column name="income" type="INT" jt="4" />
+			<column name="education_score" type="DECIMAL" jt="3" />
+			<column name="age" type="INT" jt="4" />
+			<column name="first_interaction" type="DATE" jt="91" mandatory="y" />
+			<column name="city_type" type="CHAR" length="1" jt="1" />
+			<column name="employer_category" type="INT" jt="4" />
+			<index name="pk_patient_profile" unique="PRIMARY_KEY" >
+				<column name="patient_id" />
+			</index>
+			<fk name="fk_patient_profile_employer_category" to_schema="healthcare-analytics" to_table="employer_category" >
+				<fk_column name="employer_category" pk="id" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="second_health_camp_attended" prior="tbl" >
+			<column name="patient_id" type="INT" jt="4" mandatory="y" />
+			<column name="health_camp_id" type="INT" jt="4" mandatory="y" />
+			<column name="health score" type="DECIMAL" jt="3" mandatory="y" />
+			<fk name="fk_second_health_camp_attended_patient_profile" to_schema="healthcare-analytics" to_table="patient_profile" >
+				<fk_column name="patient_id" pk="patient_id" />
+			</fk>
+			<fk name="fk_second_health_camp_attended_health_camp_detail" to_schema="healthcare-analytics" to_table="health_camp_detail" >
+				<fk_column name="health_camp_id" pk="health_camp_id" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="third_health_camp_attended" prior="third_health_camp_attend" >
+			<column name="patient_id" type="INT" jt="4" mandatory="y" />
+			<column name="health_camp_id" type="INT" jt="4" mandatory="y" />
+			<column name="number_of_stall_visited" type="INT" jt="4" mandatory="y" />
+			<column name="last_stall_visited_number" type="INT" jt="4" mandatory="y" />
+			<fk name="fk_third_health_camp_attended_patient_profile" to_schema="healthcare-analytics" to_table="patient_profile" >
+				<fk_column name="patient_id" pk="patient_id" />
+			</fk>
+			<fk name="fk_third_health_camp_attended_health_camp_detail" to_schema="healthcare-analytics" to_table="health_camp_detail" >
+				<fk_column name="health_camp_id" pk="health_camp_id" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+	</schema>
+	<layout name="Default Layout" id="Layout-10de" show_relation="columns" >
+		<entity schema="healthcare-analytics" name="attendance" color="C1D8EE" x="48" y="336" />
+		<entity schema="healthcare-analytics" name="employer_category" color="C1D8EE" x="576" y="64" />
+		<entity schema="healthcare-analytics" name="first_health_camp_attended" color="C1D8EE" x="224" y="352" />
+		<entity schema="healthcare-analytics" name="health_camp_detail" color="C1D8EE" x="336" y="528" />
+		<entity schema="healthcare-analytics" name="patient_profile" color="C1D8EE" x="336" y="48" />
+		<entity schema="healthcare-analytics" name="second_health_camp_attended" color="C1D8EE" x="448" y="352" />
+		<entity schema="healthcare-analytics" name="third_health_camp_attended" color="C1D8EE" x="688" y="352" />
+	</layout>
+</project>

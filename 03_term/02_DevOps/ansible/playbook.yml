@@ -1,0 +1,43 @@
+- name: Install Packages
+  hosts: servers
+  tasks:
+    - name: Touches file
+      ansible.builtin.file:
+        path: ~/foo
+        state: touch
+
+    - name: Creates directory
+      ansible.builtin.file:
+        path: ~/bar
+        state: directory
+        mode: '0700'
+    
+    - name: Closes access
+      file:
+        path: ~/
+        state: directory
+        mode: '0700'
+    
+    - name: Copies Notebook
+      ansible.builtin.copy:
+        src: requirements.txt
+        dest: ~/requirements.txt
+
+    - name: Installs jupyter Notebook
+      pip:
+        virtualenv: ~/JupyterEnv
+        requirements: ~/requirements.txt
+    
+    - name: Gets IP
+      shell: hostname -i
+      register: ip_output
+
+    - set_fact:
+        ip: "{{ ip_output.stdout }}"
+
+    - name: Echo facts
+      debug:
+        var: ip
+
+    - name: "Echo IP"
+      shell: echo {{ ip }}

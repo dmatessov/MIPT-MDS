@@ -1,0 +1,41 @@
+ 
+Аналоги косинусного расстояния:
+1/ Евклидово расстояние
+2/ Манхэттенское расстояние
+3/ Коэффициент корреляции Пирсона
+4/ Коэффициент Жаккара
+5/ Коэффициент Дайса
+
+Библиотеки для построения семантических графов:
+1/ RDFlib ()
+2/ Apache Jena
+3/ Neo4j
+4/ Stardog
+5/ Grakn.AI
+
+https://github.com/natasha
+
+Есть вот такая статья отличная по Natasha https://habr.com/ru/articles/516098/
+
+
+habr.com
+
+Проект Natasha. Набор качественных открытых инструментов для обработки естественного русского языка (NLP) / Хабр
+Два года назад я писал на Хабр статью про Yargy-парсер и библиотеку Natasha , рассказывал про решение задачи NER для русского языка, построенное на правилах. Проект хорошо приняли. Yargy-парсер...
+
+И еще был воппрос по эмбедингам, где они в коде есть. Смотрите вот у вас есть код:
+
+    def _embed_bert_cls(self, tokenized_text: dict[torch.Tensor]) -> np.array:
+        with torch.no_grad():
+            model_output = self.retriever(**{k: v.to(self.retriever.device) for k, v in tokenized_text.items()})
+        embeddings = model_output.last_hidden_state[:, 0, :]
+        embeddings = torch.nn.functional.normalize(embeddings)
+        return embeddings[0].cpu().numpy()
+
+Значит так:
+1/  embeddings = model_output.last_hidden_state[:, 0, :] - здесь у вас извлекается последнее скрытое состояние (last_hidden_state) из model_output. В данном случае, используется только первый токен [CLS], обозначающий начало последовательности.
+
+2/ embeddings = torch.nn.functional.normalize(embeddings) - эмбеддинги нормализуются с помощью функции normalize из модуля torch.nn.functional. Нормализация эмбеддингов обычно выполняется для установления единичной длины векторов и улучшения сравнения семантической близости.
+
+3/ return embeddings[0].cpu().numpy() - первый эмбеддинг извлекается из тензора embeddings, конвертируется в массив NumPy и возвращается как результат функции.
+
